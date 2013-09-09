@@ -1,0 +1,33 @@
+\name{SimData}
+\alias{SimData}
+\docType{data}
+\title{
+%%   ~~ data name/kind ... ~~
+}
+\description{
+%%  ~~ A concise (1-5 lines) description of the dataset. ~~
+}
+\usage{data(SimData)}
+\format{
+  A data frame with 500 observations on the following 4 variables.
+  \describe{
+    \item{\code{stime}}{a numeric vector}
+    \item{\code{status}}{a numeric vector}
+    \item{\code{y1}}{a numeric vector}
+    \item{\code{y2}}{a numeric vector}
+  }
+}
+\details{
+%%  ~~ If necessary, more details than the __description__ above ~~
+}
+\source{
+%%  ~~ reference to a publication or URL from which the data were obtained ~~
+}
+\references{
+%%  ~~ possibly secondary sources and usages ~~
+}
+\examples{
+data(SimData)
+## maybe str(SimData) ; plot(SimData) ...
+}
+\keyword{datasets}

@@ -1,0 +1,11 @@
+Package: survNRI
+Type: Package
+Title: Estimate NRI for survival data
+Version: 0.1
+Date: 2013-04-09
+Author: Yingye Zheng, Tianxi Cai and Marshall Brown
+Maintainer: Marshall Brown <mdbrown@fhcrc.org>
+Description: Calculate NRI statistic for survival data using five different estimators. 
+License: GPL-2
+Depends: MASS, survival
+URL: https://github.com/mdbrown/survRpackages

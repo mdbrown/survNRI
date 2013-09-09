@@ -1,0 +1,57 @@
+survNRI
+============================
+
+This package contains a single function `survNRI` which calculates the NRI for survival data using up to five different estimators. The different methods available are:
+
+- *KM* = Kaplan- Meier estimator 
+- *IPW* = Inverse probability weighted estimator 
+- *SmoothIPW* = Smooth inverse probability weighted estimator 
+- *SEM* = Semi-parametric estimator
+- *Combined*= Combined estimator as described (along with all other estimates) in the reference paper.
+
+### Tutorial
+
+
+```{r}
+library(survNRI)
+#some simulated data for example. 
+data(SimData)
+
+#take a look 
+head(SimData)
+```
+
+Calculate the NRI using all estimators at future time 2.
+
+
+```{r}
+#bootstrap only 10 times to reduce computation for this example. 
+survNRI( time  = "stime", event = "status", model1 = "y1", model2 = c("y1", "y2"), data = SimData, 
+         predict.time = 2, method = "all", bootMethod = "normal",  bootstraps = 10, alpha = .05)
+```
+
+Now only estimate using the smooth IPW, SEM and combined methods. 
+
+```{r}
+tmp <- survNRI( time  = "stime", event = "status", model1 = "y1", model2 = c("y1", "y2"), data = SimData, 
+         predict.time = 3, method = c("SmoothIPW", "SEM", "Combined"), bootMethod = "percentile", bootstraps = 10, alpha = .01)
+
+#look at the results
+tmp
+```
+
+```{r}
+#access estimates and ci's
+tmp$estimates
+tmp$CI
+```
+
+
+for more information see `?survNRI`. 
+
+### References 
+
+*Lifetime Data Analysis* 2012 Dec 20. [Epub ahead of print] Evaluating incremental values from new predictors with net reclassification improvement in survival analysis. Zheng Y, Parast L, Cai T, Brown M. PMID: 23254468
+
+
+

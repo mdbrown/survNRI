@@ -1,0 +1,144 @@
+\name{survNRI}
+\alias{survNRI}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+ Calculate NRI statistic for survival data
+}
+\description{
+ Calculates the NRI for survival data using up to five different estimators. The different methods available are:
+      "KM"  = Kaplan- Meier estimator, 
+      "IPW" = Inverse probability weighted estimator,
+      "SmoothIPW" = Smooth inverse probability weighted estimator, 
+      "SEM" = Semi-parametric estimator, 
+      "Combined"= Combined estimator as described (along with all other estimates) in the reference paper. 
+
+}
+\usage{
+survNRI(time, event, model1, model2, data, 
+              predict.time, method = "all", bw.power = 0.35, 
+              bootMethod = "normal", bootstraps = 500, alpha = 0.05)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{time}{
+  Character string indicating the variable name for survival time in data frame provided to 'data'
+}
+  \item{event}{
+  Character string indicating the variable name for event indicator in data frame provided to 'data'
+}
+  \item{model1}{
+  Character string or vector of character strings indicating the names of the markers for the existing model 1 in the data frame provided to 'data'. 
+}
+  \item{model2}{
+  Character string or vector of character strings indicating the names of the markers for the new model 2 in the data frame provided to 'data'.
+}
+  \item{data}{
+  data frame consisting of survival time, event status, and marker values. 
+}
+  \item{predict.time}{
+  future time for which to estimate the NRI statistic. 
+}
+  \item{method}{
+  Character string or vector of character strings indicating which methods to use to estimate the NRI. Must be a vector subset of   c("KM", "IPW", "SmoothIPW", "SEM", "Combined", "all")
+      "KM"  = Kaplan-Meier estimator,       
+      "IPW" = Inverse probability weighted estimator,
+      "SmoothIPW" = Smooth inverse probability weighted estimator, 
+      "SEM" = Semi-parametric estimator, 
+      "Combined" = Combined estimator as described (along with all other estimates) in the reference paper. 
+
+  Default value is ''all'', which returns all estimates.    
+}
+  \item{bw.power}{
+  tuning parameter used for the Smoothed IPW estimate. Default value is 0.35. 
+}
+
+  \item{bootMethod}{
+  Method to use to calculate bootstrap confidence intervals. Options are "normal" (default) to use normal approximation, "percentile" to compute CI's based on the percentiles of the empirical bootstrap distribution or "none" if no confidence intervals should be computed.  
+}
+  \item{bootstraps}{
+  Number of bootstrap replicates to use for confidence intervals. Default number is 500. 
+}
+  \item{alpha}{
+   (1-alpha)*100\% confidence intervals are calculated. Default value is alpha = 0.05 which yields 95\% CI's.
+}
+}
+
+\value{
+
+List with elements:
+
+
+
+\item{estimates}{  
+ Data frame with 3 columns and a row for each estimate. The columns are:
+
+  NRI.event    =  NRI | event = NRI | T_i < predict.time
+  NRI.nonevent =  NRI | non-event = NRI | T_i > predict.time
+  NRI 
+}
+\item{CI}{ A list consisting of the upper and lower bounds for all estimates by NRI.event, NRI.nonevent and NRI}
+\item{bootMethod}{ bootMethod specified by function call}
+\item{predict.time}{ predict.time specified by function call}
+\item{alpha}{alpha value specified by function call}
+
+  
+
+}
+\references{
+
+
+Lifetime Data Anal. 2012 Dec 20. [Epub ahead of print]
+Evaluating incremental values from new predictors with net reclassification improvement in survival analysis.
+Zheng Y, Parast L, Cai T, Brown M. PMID:  23254468
+
+
+}
+
+\examples{
+#load simulated data
+data(SimData)
+
+#all estimates, with 95% normal approx bootstrap CI
+survNRI( time  = "stime", event = "status",
+                          model1 = "y1",
+                          model2 = c("y1", "y2"),
+                          data = SimData, 
+                          predict.time = 3,
+                          method = "all",
+                          bootMethod = "normal",
+                          bootstraps = 25)
+
+#only SmoothIPW, SEM and combined, with 99% bootstrap percentile CI
+tmp <- survNRI( time  = "stime", event = "status",
+                                 model1 = "y1", 
+                                 model2 = c("y1", "y2"),
+                                 data = SimData, 
+                                 predict.time = 3,
+                                 method = c("SmoothIPW", "SEM", "Combined"),
+                                 bootMethod ="percentile", 
+                                 bootstraps = 25,
+                                 alpha = .01  )
+#look at the results
+tmp
+
+#access estimates and ci's
+tmp$estimates
+tmp$CI
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

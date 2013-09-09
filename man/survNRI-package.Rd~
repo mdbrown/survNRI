@@ -1,0 +1,71 @@
+\name{survNRI-package}
+\alias{survNRI-package}
+
+\docType{package}
+\title{
+
+Calculate estimates of NRI for survival data. 
+
+}
+\description{
+This package consists of a single function 'survNRI' that calculates five different estimators of the Net Reclassification Improvement  (NRI) statistic. See references below and ?survNRI for more information. 
+}
+\details{
+\tabular{ll}{
+Package: \tab survNRI\cr
+Type: \tab Package\cr
+Version: \tab 0.0\cr
+Date: \tab 2013-04-09\cr
+License: GPL-2
+}
+
+}
+\author{
+
+Yingye Zhenge and Marshall Brown
+
+Maintainer: <mdbrown@fhcrc.org>
+
+}
+
+\references{
+
+Lifetime Data Anal. 2012 Dec 20. [Epub ahead of print]
+Evaluating incremental values from new predictors with net reclassification improvement in survival analysis.
+Zheng Y, Parast L, Cai T, Brown M. PMID:  23254468
+}
+
+\examples{
+#load simulated data
+data(SimData)
+
+
+#all estimates, with 95% normal approx bootstrap CI
+survNRI( time  = "stime", event = "status",
+                          model1 = "y1",
+                          model2 = c("y1", "y2"),
+                          data = SimData, 
+                          predict.time = 3,
+                          method = "all",
+                          bootMethod = "normal",
+                          bootstraps = 25)
+
+#only SmoothIPW, SEM and combined, with 99% bootstrap percentile CI
+tmp <- survNRI( time  = "stime", event = "status",
+                                 model1 = "y1", 
+                                 model2 = c("y1", "y2"),
+                                 data = SimData, 
+                                 predict.time = 3,
+                                 method = c("SmoothIPW", "SEM", "Combined"),
+                                 bootMethod ="percentile", 
+                                 bootstraps = 25,
+                                 alpha = .01  )
+
+#look at the results
+tmp
+
+#access estimates and ci's
+tmp$estimates
+tmp$CI
+
+}

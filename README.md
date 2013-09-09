@@ -1,7 +1,6 @@
 survNRI
 ============================
-
-This package contains a single function `survNRI` which calculates the NRI for survival data using up to five different estimators. The different methods available are:
+This package contains a single function `survNRI` which calculates the net reclassification index (NRI) for survival data using up to five different estimators. The different methods available are:
 
 - *KM* = Kaplan- Meier estimator 
 - *IPW* = Inverse probability weighted estimator 
@@ -11,15 +10,18 @@ This package contains a single function `survNRI` which calculates the NRI for s
 
 ### Tutorial
 
-
-
 ```r
-library(survNRI)
-```
+#install the package from github
+if (!require("devtools")) install.packages("devtools")
+devtools::install_github("survNRI", "mdbrown")
 
-```
-## Loading required package: MASS Loading required package: survival Loading
-## required package: splines
+library(survNRI)
+
+# some simulated data for example.
+data(SimData)
+
+# take a look
+head(SimData)
 ```
 
 ```r

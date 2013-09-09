@@ -24,14 +24,6 @@ data(SimData)
 head(SimData)
 ```
 
-```r
-# some simulated data for example.
-data(SimData)
-
-# take a look
-head(SimData)
-```
-
 ```
 ##     stime status      y1      y2
 ## 1  3.9739      1  0.6942 -1.3600

@@ -16,10 +16,10 @@ bootdat <- replicate(bootstraps, one.boot(time, event, model1,
                                   method,
                                   bw.power))
 #lower bounds
-
-bootdat.NRI.event    <- bootdat[,1,]
-bootdat.NRI.nonevent <- bootdat[,2,]
-bootdat.NRI          <- bootdat[,3,]  
+#If only one method is used this need to stay matrices
+bootdat.NRI.event    <- bootdat[,1,,drop=F]
+bootdat.NRI.nonevent <- bootdat[,2,,drop=F]
+bootdat.NRI          <- bootdat[,3,,drop=F]  
 
 if(bootMethod == "percentile"){
 

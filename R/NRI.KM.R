@@ -11,5 +11,14 @@ function(Pt2, Pt1, data, predict.time) {
    NRI.event = Pt.P2geP1*Pt2gePt1/Pt
    NRI.nonevent = (1-Pt.P2geP1)*Pt2gePt1/(1-Pt)
 
-   c(NRI.event=NRI.event,NRI.nonevent=NRI.nonevent, NRI=2*(NRI.event-NRI.nonevent)) 
+   
+  # c(NRI.event=NRI.event,
+  #  NRI.nonevent=NRI.nonevent,
+  #   NRI=2*(NRI.event-NRI.nonevent)) 
+   
+   
+     
+   c(NRI.event=2*NRI.event-1,
+            NRI.nonevent=1-2*NRI.nonevent,
+            NRI=2*(NRI.event-NRI.nonevent))
 }

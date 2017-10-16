@@ -26,5 +26,10 @@ function(times, status, predict.time, Pt2,Pt1,bw=NULL, bw.power =bw.power, yes.s
    NRI.event   = Pt.B1*mean(Bi, na.rm=TRUE)/Pt
    NRI.nonevent = (1-Pt.B1)*mean(Bi, na.rm=TRUE)/(1-Pt)
    
-   c(NRI.event=NRI.event,NRI.nonevent=NRI.nonevent, NRI=2*(NRI.event-NRI.nonevent)) 
+  # c(NRI.event=NRI.event,
+  #   NRI.nonevent=NRI.nonevent,
+  #   NRI=2*(NRI.event-NRI.nonevent)) 
+   c(NRI.event=2*NRI.event-1,
+     NRI.nonevent=1-2*NRI.nonevent,
+     NRI=2*(NRI.event-NRI.nonevent))
 }

@@ -1,12 +1,7 @@
----
-title: 'Tutorial for R package `survNRI`'
-date: 'October 16, 2017' 
-output: 
-  html_document: 
-    keep_md: yes
----
+survNRI
+============================
 
-This package contains a single function, `survNRI`, which calculates the NRI for survival data using up to five different estimators. The different methods available are:
+This package contains a single function `survNRI` which calculates the NRI for survival data using up to five different estimators. The different methods available are:
 
 - *KM* = Kaplan- Meier estimator 
 - *IPW* = Inverse probability weighted estimator 
@@ -16,22 +11,9 @@ This package contains a single function, `survNRI`, which calculates the NRI for
 
 ### Tutorial
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, messages = FALSE, warning = FALSE)
-```
-
-Install the package from Github using the `devtools` package. 
-
-```{r results = 'hide', warning = FALSE, message=FALSE, eval = FALSE }
-library(devtools) 
-install_github("mdbrown/survNRI")
-```
-
-```{r results = 'hide', warning = FALSE, message=FALSE }
-library(survNRI)
-```
 
 ```{r}
+library(survNRI)
 #some simulated data for example. 
 data(SimData)
 

@@ -8,8 +8,8 @@ survNRI <-
         if(!all(is.element(model1, names(data)))) stop("'model1' variable names not recognized")
         if(!all(is.element(model2, names(data)))) stop("'model2' variable names not recognized")
         bootMethod <- match.arg(bootMethod)
-
-        tmpdat <- data[,-which(c(time, event)==names(data)) ]
+        
+        tmpdat <- data[,-which(is.element(c(time, event), names(data)) )]
 
 
         time = data[,time]
